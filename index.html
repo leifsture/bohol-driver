@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Bohol Private Driver & Tours</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+/* -------------------- GLOBAL STYLE -------------------- */
+:root {
+  --blue: #005C8A;
+  --green: #2BAE66;
+  --orange: #F28C28;
+  --white: #ffffff;
+  --light: #f7f7f7;
+  --dark: #222;
+}
+
+body {
+  margin: 0;
+  font-family: "Inter", sans-serif;
+  background: var(--light);
+  color: var(--dark);
+  line-height: 1.7;
+}
+
+h1, h2, h3 {
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+section {
+  padding: 60px 20px;
+  max-width: 1100px;
+  margin: auto;
+}
+
+.center {
+  text-align: center;
+}
+
+/* -------------------- HEADER -------------------- */
+header {
+  background: var(--white);
+  padding: 20px;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 2rem;
+  color: var(--blue);
+}
+
+header p {
+  margin: 5px 0 0;
+  font-size: 1rem;
+  opacity: 0.8;
+}
+
+/* -------------------- HERO -------------------- */
+.hero {
+  padding: 80px 20px;
+  text-align: center;
+  background: linear-gradient(135deg, var(--blue), var(--green));
+  color: white;
+}
+
+.hero h2 {
+  font-size: 2.4rem;
+  margin-bottom: 10px;
+}
+
+.hero p {
+  font-size: 1.2rem;
+  max-width: 700px;
+  margin: auto;
+  opacity: 0.95;
+}
+
+.btn {
+  display: inline-block;
+  padding: 14px 26px;
+  margin-top: 20px;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: 0.2s;
+}
+
+.btn-primary {
+  background: var(--orange);
+  color: white;
+}
+
+.btn-primary:hover {
+  background: #d97706;
+}
+
+/* -------------------- TOURS -------------------- */
+.tour-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+.tour-card {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
+
+.tour-card h3 {
+  margin-top: 0;
+  color: var(--blue);
+}
+
+/* -------------------- GALLERY -------------------- */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 15px;
+}
+
+.gallery img {
+  width: 100%;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.gallery img:hover {
+  transform: scale(1.03);
+}
+
+/* Lightbox */
+#lightbox {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.85);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+#lightbox img {
+  max-width: 90%;
+  max-height: 90%;
+  border-radius: 10px;
+}
+
+/* -------------------- CONTACT FORM -------------------- */
+form {
+  background: var(--white);
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  max-width: 600px;
+  margin: auto;
+  position: relative;
+}
+
+label {
+  font-weight: 600;
+  display: block;
+  margin-bottom: 6px;
+}
+
+input, textarea, select {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 18px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+}
+
+button {
+  background: var(--green);
+  color: white;
+  padding: 14px 26px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  width: 100%;
+}
+
+button:hover {
+  background: #239a58;
+}
+
+/* Loading overlay */
+#loadingOverlay {
+  display:none;
+  position:absolute;
+  top:0; left:0;
+  width:100%; height:100%;
+  background:rgba(255,255,255,0.8);
+  backdrop-filter: blur(3px);
+  border-radius:12px;
+  justify-content:center;
+  align-items:center;
+  z-index:10;
+}
+
+.spinner {
+  width:40px; height:40px;
+  border:4px solid #ccc;
+  border-top-color:#2BAE66;
+  border-radius:50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Success modal */
+#successModal {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.75);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+#successModal .box {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  max-width: 400px;
+  text-align: center;
+}
+
+/* -------------------- FOOTER -------------------- */
+footer {
+  background: var(--dark);
+  color: white;
+  padding: 20px;
+  text-align: center;
+  margin-top: 40px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>Bohol Private Driver & Tours</h1>
+  <p>Your Journey. Your Comfort. Your Time.</p>
+</header>
+
+<section class="hero">
+  <h2>Explore Bohol in Comfort & Style</h2>
+  <p>Private air‑conditioned tours with a friendly local driver.  
+     See Chocolate Hills, Tarsiers, Loboc River, Panglao beaches and more — at your own pace.</p>
+  <a href="#contact" class="btn btn-primary">Book Your Tour</a>
+</section>
+
+<section>
+  <h2 class="center">Our Most Popular Tours</h2>
+
+  <div class="tour-grid">
+    <div class="tour-card">
+      <h3>Bohol Countryside Tour</h3>
+      <p>Chocolate Hills, Tarsiers, Loboc River Cruise, Man‑Made Forest, Bamboo Bridge, Baclayon Church, Butterfly Garden.</p>
+    </div>
+
+    <div class="tour-card">
+      <h3>Panglao Island Tour</h3>
+      <p>Hinagdanan Cave, Bee Farm, Shell Museum, Dauis Church, Panglao Beaches.</p>
+    </div>
+
+    <div class="tour-card">
+      <h3>Tagbilaran City Tour</h3>
+      <p>Cathedral, Museum, Dao Market, Island City Mall, Blood Compact Monument.</p>
+    </div>
+
+    <div class="tour-card">
+      <h3>Sagbayan Peak Adventure</h3>
+      <p>Viewpoints, photo spots, relaxing countryside atmosphere.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="gallery">
+    <img src="grandia.JPG">
+    <img src="bloodcompact1.jpg">
+    <img src="chocolate_hills.jpg">
+
+  </div>
+</section>
+
+<!-- Lightbox -->
+<div id="lightbox">
+  <img src="">
+</div>
+
+<section id="contact">
+  <h4 class="center">Where you like to go?</h4>
+  <h3 class="center">What prices we have?</h3>
+  <h2 class="center">Fill in the form, we will contact you</h2>
+
+  <!-- SUCCESS POPUP -->
+  <div id="successModal">
+    <div class="box">
+      <h3 style="color:#2BAE66;">Thank you!</h3>
+      <p>Your booking request has been sent successfully.</p>
+      <button onclick="document.getElementById('successModal').style.display='none'"
+        style="padding:10px 20px; border:none; background:#2BAE66; color:white; border-radius:6px; cursor:pointer;">
+        Close
+      </button>
+    </div>
+  </div>
+
+  <!-- BOOKING FORM -->
+  <form id="bookingForm" action="https://formspree.io/f/mrevbrrd" method="POST">
+
+    <!-- LOADING OVERLAY -->
+    <div id="loadingOverlay">
+      <div class="spinner"></div>
+    </div>
+
+    <!-- HONEYPOT (spam protection) -->
+    <input type="text" name="_gotcha" style="display:none !important">
+
+    <label>Full Name</label>
+    <input type="text" name="name" required>
+
+    <label>Phone Nr</label>
+    <input type="text" name="phone" required>
+
+
+    <label>Email Address</label>
+    <input type="email" name="email" required>
+
+    <label>Preferred Tour</label>
+    <select name="tour" required>
+      <option value="">Select a tour</option>
+      <option>Bohol Countryside Tour</option>
+      <option>Panglao Island Tour</option>
+      <option>Tagbilaran City Tour</option>
+      <option>Sagbayan Peak Adventure</option>
+      <option>Custom Tour</option>
+	<option>Other</option>
+    </select>
+
+    <label>Preferred Date</label>
+    <input type="date" name="date" required>
+
+    <label>Message / Notes</label>
+    <textarea name="message" required></textarea>
+
+    <button type="submit">Send Booking Request</button>
+
+  </form>
+</section>
+
+<footer>
+  © <span id="year"></span> Bohol Private Driver & Tours
+</footer>
+
+<script>
+// Lightbox
+const lightbox = document.getElementById("lightbox");
+const lightboxImg = lightbox.querySelector("img");
+
+document.querySelectorAll(".gallery img").forEach(img => {
+  img.addEventListener("click", () => {
+    lightbox.style.display = "flex";
+    lightboxImg.src = img.src;
+  });
+});
+
+lightbox.addEventListener("click", () => {
+  lightbox.style.display = "none";
+});
+
+// Year
+document.getElementById("year").textContent = new Date().getFullYear();
+
+// Form submission
+const form = document.getElementById("bookingForm");
+const loading = document.getElementById("loadingOverlay");
+const modal = document.getElementById("successModal");
+
+form.addEventListener("submit", async function(e) {
+  e.preventDefault();
+
+  loading.style.display = "flex";
+
+  const data = new FormData(form);
+
+  const response = await fetch(form.action, {
+    method: form.method,
+    body: data,
+    headers: { 'Accept': 'application/json' }
+  });
+
+  loading.style.display = "none";
+
+  if (response.ok) {
+    modal.style.display = "flex";
+    form.reset();
+
+    // Redirect after 3 seconds
+    setTimeout(() => {
+      window.location.href = "thankyou.html";
+    }, 3000);
+
+  } else {
+    alert("Something went wrong. Please try again.");
+  }
+});
+</script>
+
+</body>
+</html>
